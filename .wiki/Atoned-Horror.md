@@ -15,3 +15,5 @@ The **Atoned Horror** is summoned by using an Atoned Flesh on a normal Zombie.
 
 ### History
 - 1.0.0 - Released
+
+- test
