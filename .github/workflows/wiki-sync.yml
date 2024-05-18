@@ -3,7 +3,7 @@ name: Documentation
 on:
   push:
     branches:
-      - main
+      - autowiki
     paths:
       - ".wiki/**"
   repository_dispatch:
