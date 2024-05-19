@@ -39,6 +39,7 @@ jobs:
   sync-docs-to-wiki:
     runs-on: ubuntu-latest
     needs: check-trigger
+    if: github.event_name == 'gollum'
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -55,6 +56,7 @@ jobs:
   sync-wiki-to-docs:
     runs-on: ubuntu-latest
     needs: check-trigger
+    if: github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
