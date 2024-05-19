@@ -8,6 +8,8 @@ When a Superior Dragon fails to spawn when summoning an Ender Dragon, one of the
 - Old Dragon
 - Wise Dragon
 
+If you are looking for Superior Dragon info, check [this](https://github.com/Poseidon-I/HypixelSBInVanillaMC/wiki/Superior-Dragon) page out instead.
+
 ### Stats & Special Abilities
 **Unstable Dragon**
 - HP - 200
