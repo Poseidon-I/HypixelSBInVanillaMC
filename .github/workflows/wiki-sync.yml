@@ -29,12 +29,12 @@ jobs:
           else
             echo "::set-output name=trigger_message::This workflow was triggered by ${{ github.event_name }}."
           fi
-  print-trigger:
+  print-trigger-message:
     needs: [check-trigger]
     runs-on: ubuntu-latest
     steps:
       - name: Print Trigger Message
-        run: echo "${{ needs.check-trigger-event.outputs.trigger_message }}"
+        run: echo "${{ needs.check-trigger.outputs.trigger_message }}"
 
   sync-docs-to-wiki:
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Sync docs to wiki
+      - name: Sync .wiki to wiki
         uses: newrelic/wiki-sync-action@main
         with:
           source: .wiki
@@ -62,7 +62,7 @@ jobs:
           token: ${{ secrets.NEWRELIC_BOT_TOKEN }}
           ref: autowiki
 
-      - name: Sync Wiki to Docs
+      - name: Sync Wiki to .wiki
         uses: newrelic/wiki-sync-action@main
         with:
           source: wiki
