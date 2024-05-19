@@ -25,11 +25,17 @@ jobs:
         id: check_trigger_event
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            echo "This workflow was triggered manually. Check the Manual Wiki Sync workflow in the Actions tab to see who triggered it."
-            echo "::set-output name=trigger_message::This workflow was triggered manually."
+            echo "::set-output name=trigger_message::This workflow was triggered manually. Check the Manual Wiki Sync workflow in the Actions tab to see who triggered it."
           else
-            echo "This workflow was triggered by ${{ github.event_name }}."
             echo "::set-output name=trigger_message::This workflow was triggered by ${{ github.event_name }}."
+          fi
+
+  print-trigger-message:
+    needs: [check-trigger-event]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Trigger Message
+        run: echo "${{ needs.check-trigger-event.outputs.trigger_message }}"
 
   job-sync-docs-to-wiki:
     runs-on: ubuntu-latest
@@ -38,9 +44,6 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-
-      - name: Print Trigger Message
-        run: echo "${{ needs.check-trigger-event.outputs.trigger_message }}"
 
       - name: Sync docs to wiki
         uses: newrelic/wiki-sync-action@main
@@ -61,9 +64,6 @@ jobs:
         with:
           token: ${{ secrets.NEWRELIC_BOT_TOKEN }}
           ref: autowiki
-
-      - name: Print Trigger Message
-        run: echo "${{ needs.check-trigger-event.outputs.trigger_message }}"
 
       - name: Sync Wiki to Docs
         uses: newrelic/wiki-sync-action@main
