@@ -39,7 +39,6 @@ jobs:
 
   job-sync-docs-to-wiki:
     runs-on: ubuntu-latest
-    if: github.event_name != 'gollum'
     needs: check-trigger-event
     steps:
       - name: Checkout Repo
@@ -56,7 +55,6 @@ jobs:
   
   job-sync-wiki-to-docs:
     runs-on: ubuntu-latest
-    if: github.event_name == 'gollum'
     needs: check-trigger-event
     steps:
       - name: Checkout Repo
